@@ -12,6 +12,7 @@ import GoalInput from './components/GoalInput';
 import GoalItem from './components/GoalItem';
 
 export default function App() {
+  const [modelVisible, setModelVisible] = useState(false);
   const [courseGoals, setCourseGoals] = useState([]);
   function addGoalHandler(enteredGoalText) {
     setCourseGoals([
@@ -23,10 +24,18 @@ export default function App() {
     console.log(id);
     setCourseGoals((curGoals) => curGoals.filter((goal) => goal.id !== id));
   }
+  function startAddGoalHandler() {
+    setModelVisible(true);
+  }
 
   return (
     <View style={styles.appContainer}>
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button
+        title='Add new Goal'
+        color='#5e0acc'
+        onPress={startAddGoalHandler}
+      />
+      <GoalInput visible={modelVisible} onAddGoal={addGoalHandler} />
       <View style={styles.goalContainer}>
         <FlatList
           data={courseGoals}
