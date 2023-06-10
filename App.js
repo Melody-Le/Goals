@@ -12,26 +12,16 @@ import GoalInput from './components/GoalInput';
 import GoalItem from './components/GoalItem';
 
 export default function App() {
-  const [enteredGoalText, setEnteredGoalText] = useState('');
   const [courseGoals, setCourseGoals] = useState([]);
-  function goalInputHandler(enterText) {
-    // different wit react.js, need to access to event.target.value , to access the data, here we can do strait like that.
-    setEnteredGoalText(enterText);
-  }
-  function addGoalHandler() {
+  function addGoalHandler(enteredGoalText) {
     setCourseGoals([
       ...courseGoals,
       { text: enteredGoalText, id: Math.random().toString() },
     ]);
-    setEnteredGoalText('');
   }
   return (
     <View style={styles.appContainer}>
-      <GoalInput
-        addGoalHandler={addGoalHandler}
-        goalInputHandler={goalInputHandler}
-        enteredGoalText={enteredGoalText}
-      />
+      <GoalInput onAddGoal={addGoalHandler} />
       <View style={styles.goalContainer}>
         <FlatList
           data={courseGoals}

@@ -1,7 +1,16 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 
-function GoalInput({ addGoalHandler, goalInputHandler, enteredGoalText }) {
+function GoalInput(props) {
+  const [enteredGoalText, setEnteredGoalText] = useState('');
+  function goalInputHandler(enterText) {
+    // different wit react.js, need to access to event.target.value , to access the data, here we can do strait like that.
+    setEnteredGoalText(enterText);
+  }
+  function addGoalHandler() {
+    props.onAddGoal(enteredGoalText);
+    setEnteredGoalText('');
+  }
   return (
     <View style={styles.inputContainer}>
       <TextInput
