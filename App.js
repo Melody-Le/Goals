@@ -19,6 +19,7 @@ export default function App() {
       ...courseGoals,
       { text: enteredGoalText, id: Math.random().toString() },
     ]);
+    endAddGoalHandler();
   }
   function deleteGoalHandler(id) {
     console.log(id);
@@ -26,6 +27,9 @@ export default function App() {
   }
   function startAddGoalHandler() {
     setModelVisible(true);
+  }
+  function endAddGoalHandler() {
+    setModelVisible(false);
   }
 
   return (
@@ -35,7 +39,11 @@ export default function App() {
         color='#5e0acc'
         onPress={startAddGoalHandler}
       />
-      <GoalInput visible={modelVisible} onAddGoal={addGoalHandler} />
+      <GoalInput
+        visible={modelVisible}
+        onAddGoal={addGoalHandler}
+        onCancel={endAddGoalHandler}
+      />
       <View style={styles.goalContainer}>
         <FlatList
           data={courseGoals}
